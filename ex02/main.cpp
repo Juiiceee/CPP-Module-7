@@ -13,5 +13,27 @@ int main()
 	{
 		std::cout << e.what();
 	}
+
+	try
+	{
+		std::cout << p[5];
+	}
+	catch (Array<int>::indexOutOfBound &e)
+	{
+		std::cout << e.what();
+	}
+
+	p[4] = 10;
+
+	try
+	{
+		std::cout << p[4] << std::endl;
+	}
+	catch (Array<int>::indexOutOfBound &e)
+	{
+		std::cout << e.what();
+	}
+
+
 	
 }

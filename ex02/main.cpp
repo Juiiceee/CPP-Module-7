@@ -3,6 +3,6 @@
 
 int main()
 {
-	Array<unsigned int> p(5);
+	Array<int> p(5);
 	
 }

@@ -1,29 +1,29 @@
 #ifndef ARRAY_HPP
-# define ARRAY_HPP
-# include <iostream>
-# include <string>
+#define ARRAY_HPP
+#include <iostream>
+#include <string>
 
-
-template<typename T>
+template <typename T>
 class Array
 {
-	private:
-		T *_array;
-		int _size;
-	public:
-		Array();
-		Array(unsigned int n);
-		Array(const Array<T> &obj);
-		Array &operator=(const Array &obj);
-		T &operator[](int size);
-		~Array();
-		int	size();
+private:
+	T *_array;
+	unsigned int _size;
 
-		class indexOutOfBound : public std::exception
-		{
-		public:
-			virtual const char *what() const throw();
-		};
+public:
+	Array();
+	Array(unsigned int n);
+	Array(const Array<T> &obj);
+	Array &operator=(const Array &obj);
+	T &operator[](unsigned int size);
+	~Array();
+	unsigned int size();
+
+	class indexOutOfBound : public std::exception
+	{
+	public:
+		virtual const char *what() const throw();
+	};
 };
 
 template <typename T>
@@ -39,10 +39,9 @@ Array<T>::Array(unsigned int n) : _size(n)
 	if (n < 0)
 		return;
 	_array = new T[n];
-	for (int i = 0; i < n; i++)
-		_array[i] = NULL;
+	for (unsigned int i = 0; i < n; i++)
+		_array[i] = 0;
 }
-
 
 template <typename T>
 Array<T>::Array(const Array<T> &obj)
@@ -66,10 +65,10 @@ Array<T> &Array<T>::operator=(const Array<T> &obj)
 }
 
 template <typename T>
-T &Array<T>::operator[](int size)
+T &Array<T>::operator[](unsigned int size)
 {
 	if (size < 0 || size >= this->_size)
-		throw (indexOutOfBound());
+		throw(indexOutOfBound());
 	return (this->_array[size]);
 }
 
@@ -80,16 +79,15 @@ const char *Array<T>::indexOutOfBound::what() const throw()
 }
 
 template <typename T>
-int	Array<T>::size()
+unsigned int Array<T>::size()
 {
 	return (this->_size);
 }
-
 
 template <typename T>
 Array<T>::~Array()
 {
 	std::cout << "Destructor of Array called\n";
-	delete [] _array;
+	delete[] _array;
 }
 #endif
